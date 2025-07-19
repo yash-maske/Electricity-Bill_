@@ -10,7 +10,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:3000',
-    'https://electricity-bill-sun3aopb2-yash-maskes-projects-93f4ac16.vercel.app'
+    'https://electricity-bill-4ov1.vercel.app'
   ],
   credentials: true
 }));
