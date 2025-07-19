@@ -13,7 +13,7 @@ const app = express()
 app.use(cors({
      origin: [
     "http://localhost:5173",
-    "https://flatmates-confesion-15wz.vercel.app"
+    "https://electricity-bill-4ov1.vercel.app"
   ]
 }));
 
