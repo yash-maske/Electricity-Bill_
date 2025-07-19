@@ -1,49 +1,27 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import express from 'express';
 import cors from 'cors';
-import connectDB from './config/connectdb.js'
-import billRoutes from './routes/billRoutes.js'
-const DATABASE_URL = process.env.MONGODB_URI;
-const port = process.env.PORT || 8000;
+import mongoose from 'mongoose';
+import billRoutes from './routes/billRoutes.js';
+import dotenv from 'dotenv';
 
-const app = express()
+dotenv.config();
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://electricity-bill-4ov1.vercel.app"
-  ]
-}));
-
-
-
+const app = express();
+app.use(cors());
 app.use(express.json());
 
-
-app.use("/api/save",billRoutes);
-
-app.get('/',(req,res)=>{
-    res.send({
-        activeStatus : true,
-        error : false,
-        hii : true
-    });
-})
-
-
-connectDB(DATABASE_URL).then(()=>{
-    console.log('MongoDB Connected Successfully...');
-    app.listen(port,()=>{
-        console.log(`Server listening at https://localhost:${port}`);
-    });
-}).catch(err=>{
-    console.error(`Failed to start server due to DB Connectioon error ${err}`)
+const mongoURI = process.env.MONGODB_URI;
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log("MongoDB connected");
+}).catch((err) => {
+  console.error("MongoDB connection error:", err);
 });
 
+app.use('/api/save', billRoutes);
 
-app.use((err, req, res, next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ message: 'Internal server error', error: err.message });
-});
+// No app.listen() ❌
+// Instead export app for Vercel to use ✅
+export default app;
