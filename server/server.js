@@ -10,11 +10,26 @@ const port = process.env.PORT || 8000;
 
 const app = express()
 
+const allowedOrigins = [
+  "https://electricity-bill-l1xdu7kvs-yash-maskes-projects-93f4ac16.vercel.app",
+  "https://electricity-bill-4ov1-yash-maskes-projects-93f4ac16.vercel.app",
+  "https://electricity-bill-4ov1-git-master-yash-maskes-projects-93f4ac16.vercel.app",
+  "https://electricity-bill-4ov1.vercel.app",
+  "https://electricity-bill-4ov1-klnpcvqs9-yash-maskes-projects-93f4ac16.vercel.app"
+];
+
 app.use(cors({
-  origin: "https://electricity-bill-l1xdu7kvs-yash-maskes-projects-93f4ac16.vercel.app",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST']
 }));
+
 
 
 app.use(express.json());
