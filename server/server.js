@@ -11,13 +11,10 @@ const port = process.env.PORT || 8000;
 const app = express()
 
 app.use(cors({
-     origin: [
-    "http://localhost:5173",
-    "https://electricity-bill-4ov1.vercel.app",
-     "https://electricity-bill-4ov1-git-master-yash-maskes-projects-93f4ac16.vercel.app/",
-          "https://electricity-bill-4ov1-git-master-yash-maskes-projects-93f4ac16.vercel.app"
-  ]
+  origin: "https://electricity-bill-4ov1-git-master-yash-maskes-projects-93f4ac16.vercel.app",
+  credentials: true
 }));
+
 
 app.use(express.json());
 
