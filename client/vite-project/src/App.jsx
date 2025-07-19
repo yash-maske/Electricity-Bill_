@@ -13,7 +13,7 @@ function App() {
 
   const fetchBillHistory = async () => {
     try {
-      const res = await axios.get('https://electricity-bill-4ov1.vercel.app/api/save/get-bill');
+      const res = await axios.get('https://electricity-bill-sun3aopb2-yash-maskes-projects-93f4ac16.vercel.app/api/save/get-bill');
       const bills = res.data.data || [];
       const formattedBills = bills.reverse().map((bill) => ({
         id: bill._id,
@@ -38,7 +38,7 @@ function App() {
 
     setLoading(true);
     try {
-      const response = await axios.post('https://electricity-bill-4ov1.vercel.app/api/save/save', {
+      const response = await axios.post('https://electricity-bill-sun3aopb2-yash-maskes-projects-93f4ac16.vercel.app/api/save/save', {
         current_units: parseInt(currentReading),
       });
 
